@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лаба №1</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+<div class="header">
+    <h1>Alferov Gleb Aleksandrovich</h1>
+    <h3>Web (P3207), Var 361750</h3>
+</div>
+
+<div class="container">
+    <div class="left-block" id="graph">
+        <section class="block plot-section">
+            <div class="graph">
+                <svg id="graph-svg" height="300" width="300" xmlns="http://www.w3.org/2000/svg">
+
+                    <!-- Оси со стрелками -->
+                    <line stroke="gray" x1="0" x2="300" y1="150" y2="150"></line>
+                    <line stroke="gray" x1="150" x2="150" y1="0" y2="300"></line>
+                    <polygon fill="white" points="150,0 144,15 156,15" stroke="white"></polygon>
+                    <polygon fill="white" points="300,150 285,156 285,144" stroke="white"></polygon>
+
+                    <!-- Засечки -->
+                    <line stroke="gray" x1="200" x2="200" y1="155" y2="145"></line>
+                    <line stroke="gray" x1="250" x2="250" y1="155" y2="145"></line>
+
+                    <line stroke="gray" x1="50" x2="50" y1="155" y2="145"></line>
+                    <line stroke="gray" x1="100" x2="100" y1="155" y2="145"></line>
+
+                    <line stroke="gray" x1="145" x2="155" y1="100" y2="100"></line>
+                    <line stroke="gray" x1="145" x2="155" y1="50" y2="50"></line>
+
+                    <line stroke="gray" x1="145" x2="155" y1="200" y2="200"></line>
+                    <line stroke="gray" x1="145" x2="155" y1="250" y2="250"></line>
+
+                    <!-- Подписи к засечкам -->
+                    <text fill="white" x="195" y="140">R/2</text>
+                    <text fill="white" x="248" y="140">R</text>
+
+                    <text fill="white" x="40" y="140">-R</text>
+                    <text fill="white" x="90" y="140">-R/2</text>
+
+                    <text fill="white" x="160" y="105">R/2</text>
+                    <text fill="white" x="160" y="55">R</text>
+
+                    <text fill="white" x="160" y="205">-R/2</text>
+                    <text fill="white" x="160" y="255">-R</text>
+
+                    <text fill="white" x="160" y="10">Y</text>
+                    <text fill="white" x="290" y="140">X</text>
+
+                    <!-- Прямоугольник (слева внизу) -->
+                    <rect x="150" y="150" width="50" height="100" fill="#0000FF" fill-opacity="0.2"
+                          stroke="#0000FF"></rect>
+
+                    <!-- Треугольник (справа снизу) -->
+                    <polygon fill="#0000FF" fill-opacity="0.2" points="200,150 150,150 150,100"
+                             stroke="#0000FF"></polygon>
+
+                    <!-- Сектор круга (левый верхний квадрант) -->
+                    <path d="M 100 150 A 50,50 0 0 0 150 200 L 150 150 Z" fill-opacity="0.2" fill="#0000FF"
+                          stroke="#0000FF"></path>
+
+                    <!-- Центр оси координат -->
+                    <!-- Здесь можно добавить круг для центра, если нужно -->
+                </svg>
+            </div>
+        </section>
+    </div>
+
+    <div class="right-block">
+        <h4 class="input">Input X -5 for -5</h4>
+        <input type="number" id="xInput" step="any" min="-3" max="5" placeholder="Input x"/>
+        <div id="buttons"></div>
+        <h4 class="input">Choose Y</h4>
+        <div id="radios">
+            <label>
+                <input type="radio" name="y" value="-2"> -2
+            </label><br>
+            <label>
+                <input type="radio" name="y" value="-1.5"> -1.5
+            </label><br>
+            <label>
+                <input type="radio" name="y" value="-1"> -1
+            </label><br>
+            <label>
+                <input type="radio" name="y" value="-0.5"> -0.5
+            </label><br>
+            <label>
+                <input type="radio" name="y" value="0"> 0
+            </label><br>
+            <label>
+                <input type="radio" name="y" value="0.5"> 0.5
+            </label><br>
+            <label>
+                <input type="radio" name="y" value="1"> 1
+            </label><br>
+            <label>
+                <input type="radio" name="y" value="1.5"> 1.5
+            </label><br>
+            <label>
+                <input type="radio" name="y" value="2"> 2
+            </label><br>
+        </div>
+
+        <h4 class="input">Choose R</h4>
+        <select name="r" id="rSelect">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+
+        <button id="getButton" value="1">Submit</button>
+    </div>
+</div>
+
+<h1 class="results">Results</h1>
+
+<div id="table">
+    <table id="resultsTable" border="1">
+        <tr>
+            <th><h2 class="headerOfTable">X</h2></th>
+            <th><h2 class="headerOfTable">Y</h2></th>
+            <th><h2 class="headerOfTable">R</h2></th>
+            <th><h2 class="headerOfTable">Answer</h2></th>
+            <th><h2 class="headerOfTable">Execution Time (nS)</h2></th>
+            <th><h2 class="headerOfTable">Server Time</h2></th>
+        </tr>
+    </table>
+</div>
+
+<script charset="utf-8" type="text/javascript">
+    console.log('Script loaded and execute');
+
+    // Создаем список чисел для Y
+    let x = -10;
+    let y = -3; // Значение по умолчанию
+    let r = 0;
+
+
+
+    // Создаем кнопки при загрузке страницы
+
+    function sendRequest() {
+        console.log(`sendRequest() called with params: x=${x}, y=${y}, r=${r}`);
+
+        const url = new URL('./fcgi-bin/fcgi.jar', window.location.href);
+
+        const params = new URLSearchParams();
+        params.set('x', x);
+        params.set('y', -y);
+        params.set('r', r);
+
+        fetch(url.href, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: params.toString()
+        })
+            .then(response => {
+                console.log("Server response received. Status:", response.status);
+                if (!response.ok) {
+                    throw new Error('Net or Server error');
+                }
+                return response.text(); // Получаем текст ответа
+            })
+            .then(resultText => {
+                console.log("Server answer:", resultText);
+
+                // Пробуем парсить JSON после того, как убедились, что формат правильный
+                let jsonResult;
+                try {
+                    jsonResult = JSON.parse(resultText);
+                    console.log("Parsing to JSON:", jsonResult);
+                } catch (e) {
+                    console.error("Error parsing JSON:", e.message);
+                    throw new Error('It is impossible to recognize JSON');
+                }
+
+                // Используем распарсенные данные для заполнения таблицы
+                const table = document.getElementById("resultsTable");
+                const newRow = table.insertRow(); // Добавляем новую строку
+
+                // Заполняем ячейки новой строки
+                const xCell = newRow.insertCell(0);
+                const yCell = newRow.insertCell(1);
+                const rCell = newRow.insertCell(2);
+                const answerCell = newRow.insertCell(3);
+                const executionTimeCell = newRow.insertCell(4);
+                const serverTimeCell = newRow.insertCell(5);
+
+                xCell.innerText = x;
+                yCell.innerText = y;
+                rCell.innerText = r;
+
+                answerCell.innerText = jsonResult.answer ? "Include" : "Not include";
+                executionTimeCell.innerText = jsonResult.executionTime;
+                serverTimeCell.innerText = jsonResult.serverTime;
+
+                // Отрисовываем точку на графике
+                drawPointOnGraph(x, y, r);
+            })
+            .catch(error => {
+                console.error("Error:", error.message);
+                alert("Error: " + error.message);
+            });
+    }
+
+    function drawPointOnGraph(xValue, yValue, rValue) {
+        console.log('drawPointOnGraph() called with params:', xValue, yValue, rValue);
+
+        // Преобразуем значения в числа
+        xValue = parseFloat(xValue);
+        yValue = parseFloat(yValue);
+        rValue = parseFloat(rValue);
+
+        console.log(`Drow point with params: x=${xValue}, y=${yValue}, r=${rValue}`);
+
+        const svgWidth = 300;
+        const svgHeight = 300;
+        const centerX = svgWidth / 2;
+        const centerY = svgHeight / 2;
+        const unit = 100 / rValue; // Масштабный коэффициент
+
+        // Вычисляем пиксельные координаты
+        const pixelX = centerX + xValue * unit;
+        const pixelY = centerY - yValue * unit; // По оси Y координаты идут вниз
+
+        console.log(`Px point coords: pixelX=${pixelX}, pixelY=${pixelY}`);
+
+        const svg = document.getElementById("graph-svg");
+        if (!svg) {
+            console.error("SVG element not found!");
+            return;
+        }
+
+        // Удаляем предыдущую точку, если она есть
+        const oldPoint = svg.querySelector("#user-point");
+        if (oldPoint) {
+            oldPoint.remove();
+        }
+
+        // Проверяем, что точка находится внутри SVG
+        if (pixelX < 0 || pixelX > svgWidth || pixelY < 0 || pixelY > svgHeight) {
+            console.warn("Point out of graph.");
+            return;
+        }
+
+        // Создаем новый элемент круга
+        const newCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        newCircle.setAttribute("id", "user-point");
+        newCircle.setAttribute("cx", pixelX);
+        newCircle.setAttribute("cy", pixelY);
+        newCircle.setAttribute("r", 5); // Радиус точки
+        newCircle.setAttribute("fill", "red");
+        newCircle.setAttribute("stroke", "black");
+        newCircle.setAttribute("stroke-width", "1");
+
+        // Добавляем круг в SVG
+        svg.appendChild(newCircle);
+    }
+
+    function isEmptyString(str) {
+        return !str || !str.trim();
+    }
+
+    document.getElementById("getButton").onclick = function () {
+        x = parseFloat(document.getElementById("xInput").value);
+        
+        const radios = document.getElementsByName('y');
+        // r = 0; // Сбрасываем значение r
+        for (const radio of radios) {
+            if (radio.checked) {
+                y = parseFloat(radio.value);
+                break;
+            }
+        }
+
+        r = parseFloat(document.getElementById("rSelect").value);
+
+         
+        // Проверяем корректность введенных данных
+        const inputBlock = document.getElementById("xInput");
+        if (isNaN(x) || x < -5 || x > 5) {
+            inputBlock.style.backgroundColor = "red";
+            return;
+        } else {
+            inputBlock.style.backgroundColor = "";
+        }
+
+        if (isNaN(y)) {
+            alert("Input Y");
+            return;
+        } else if (r === 0) {
+            alert("Choose one R number");
+            return;
+        } else {
+            console.log('Before sendRequest(): x=', x, ', y=', y, ', r=', r);
+            sendRequest();
+        }
+    };
+</script>
+</body>
+</html>

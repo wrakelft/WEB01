@@ -1,0 +1,259 @@
+/* Общие стили */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.header {
+    background-color: #007BFF;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.header h3 {
+    margin: 5px 0 0;
+    font-weight: normal;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.left-block, .right-block {
+    flex: 1;
+    min-width: 300px;
+    margin: 10px;
+}
+
+.graph {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.graph svg {
+    display: block;
+    margin: auto;
+}
+
+.input {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.right-block input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#buttons, #radios {
+    margin-bottom: 20px;
+}
+
+#buttons button, #radios label {
+    display: inline-block;
+    margin: 5px;
+}
+
+#buttons button {
+    padding: 8px 12px;
+    font-size: 16px;
+    background-color: #e7e7e7;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#buttons button:hover {
+    background-color: #d7d7d7;
+}
+
+#buttons button.active {
+    background-color: #007BFF;
+    color: white;
+    border-color: #007BFF;
+}
+
+#radios label {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#radios input[type="radio"] {
+    margin-right: 5px;
+}
+
+#getButton {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#getButton:hover {
+    background-color: #218838;
+}
+
+.results {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 24px;
+}
+
+#table {
+    margin: 20px auto;
+    max-width: 90%;
+    overflow-x: auto;
+}
+
+/* Основной стиль для выпадающего списка */
+select {
+    width: 150px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000000;
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    appearance: none; /* Убирает стандартные стрелки в большинстве браузеров */
+}
+
+/* Стиль при наведении курсора */
+select:hover {
+    background-color: #ccc;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Стиль для раскрытого списка */
+select:focus {
+    outline: none;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Убираем стили для опций */
+select option {
+    color: #000000;
+    background-color: #ffffff;
+}
+
+
+
+
+
+#resultsTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+#resultsTable th, #resultsTable td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+#resultsTable th {
+    background-color: #007BFF;
+    color: white;
+}
+
+#resultsTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#resultsTable tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Стиль для выделенной кнопки Y */
+        #buttons button.active {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        /* Дополнительные стили для графика и точки */
+        .graph {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Стили для SVG, чтобы убедиться, что он отображается корректно */
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+
+/* Стили для графика */
+.graph line,
+.graph polygon,
+.graph rect,
+.graph path,
+.graph circle {
+    stroke: #000;
+}
+
+.graph text {
+    font-size: 14px;
+    fill: #333;
+}
+
+.graph .axis {
+    stroke: #333;
+}
+
+.graph .grid-line {
+    stroke: #ccc;
+    stroke-dasharray: 2;
+}
+
+.graph .area {
+    fill: rgba(0, 123, 255, 0.2);
+    stroke: #007BFF;
+}
+
+.graph .point {
+    fill: red;
+    stroke: black;
+    stroke-width: 1;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left-block, .right-block {
+        margin: 10px 0;
+    }
+}
